@@ -1,0 +1,115 @@
+//
+//  PaintView.swift
+//  CoreGraphicsTask
+//
+//  Created by Artsiom Batura on 9/8/20.
+//  Copyright © 2020 Artsiom Batura. All rights reserved.
+//
+
+import UIKit
+
+protocol PaintViewInterface {
+    var currentBrush: BrushType { get set }
+    
+    func clearContext()
+    func undoContext()
+}
+
+class PaintView: UIView {
+
+    //MARK: - PROPERTIES
+    private var shapes: [AbstractShape] = []
+    var currentBrush: BrushType = .point
+    var currentStrokeColor: UIColor = .black
+    var currentFillColor: UIColor = .clear
+    var currentLineWidth: CGFloat = 1.0
+    
+    //MARK: - INIT
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.backgroundColor = .white
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        self.backgroundColor = .white
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+
+        shapes.forEach { (shape) in
+            guard let context = UIGraphicsGetCurrentContext() else { return }
+            context.setLineWidth(shape.lineWidth)
+            context.setLineCap(.round)
+            
+            context.setStrokeColor(shape.strokeColor.cgColor)
+            context.setFillColor(shape.fillColor.cgColor)
+            
+            shape.draw(inContext: context)
+            
+            if shape.type == .point || shape.type == .line {
+                context.strokePath()
+            } else {
+                context.drawPath(using: .fillStroke)
+            }
+        }
+    
+    }
+
+}
+
+//MARK: - PaintViewInterface Implementation
+extension PaintView: PaintViewInterface {
+    func clearContext() {
+        shapes = [AbstractShape]()
+        setNeedsDisplay()
+    }
+    
+    func undoContext() {
+        guard !shapes.isEmpty else { return }
+        
+        shapes = shapes.dropLast()
+        setNeedsDisplay()
+    }
+}
+
+// UIResponder override
+extension PaintView {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: self)
+    
+        let newShape = ShapeFactory.factoryMethod(type: self.currentBrush)
+        newShape.addPoint(point: location)
+        
+        newShape.strokeColor = currentStrokeColor
+        newShape.fillColor = currentFillColor
+        newShape.lineWidth = currentLineWidth
+        
+        self.shapes.append(newShape)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first, let currentShape = shapes.popLast() else { return }
+        let location = touch.location(in: self)
+
+        currentShape.addPoint(point: location)
+        shapes.append(currentShape)
+
+        setNeedsDisplay()
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first, let currentShape = shapes.popLast() else { return }
+        let location = touch.location(in: self)
+        
+        currentShape.addPoint(point: location)
+        shapes.append(currentShape)
+        
+        setNeedsDisplay()
+    }
+}
