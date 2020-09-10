@@ -10,6 +10,10 @@
 		0B3F86B4771F4F01743C7662 /* Pods_CoreGraphicsTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A4835366E52C6D5CFDB986 /* Pods_CoreGraphicsTask.framework */; };
 		F80574852508BE3A00E01A71 /* BrushesPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80574842508BE3A00E01A71 /* BrushesPanelView.swift */; };
 		F80574892508BEF700E01A71 /* BrushCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80574882508BEF700E01A71 /* BrushCollectionViewCell.swift */; };
+		F836A8E0250A07B4006824DA /* CGPoint + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F836A8DF250A07B4006824DA /* CGPoint + Extensions.swift */; };
+		F836A8E2250A07EB006824DA /* StarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F836A8E1250A07EB006824DA /* StarShape.swift */; };
+		F836A8E4250A07FE006824DA /* ColorsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F836A8E3250A07FE006824DA /* ColorsCollectionViewCell.swift */; };
+		F836A8E6250A080A006824DA /* ColorsPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F836A8E5250A080A006824DA /* ColorsPanelView.swift */; };
 		F836CDAB2507CB6900EB8977 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F836CDAA2507CB6900EB8977 /* AppDelegate.swift */; };
 		F836CDAD2507CB6900EB8977 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F836CDAC2507CB6900EB8977 /* SceneDelegate.swift */; };
 		F836CDAF2507CB6900EB8977 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F836CDAE2507CB6900EB8977 /* ViewController.swift */; };
@@ -23,10 +27,6 @@
 		F89E5E5D2508DF3E007E761E /* LineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E5E5C2508DF3E007E761E /* LineShape.swift */; };
 		F89E5E5F2508DF6D007E761E /* EllipseShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E5E5E2508DF6D007E761E /* EllipseShape.swift */; };
 		F89E5E612508DFAA007E761E /* ShapeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E5E602508DFAA007E761E /* ShapeFactory.swift */; };
-		F89E5E642508E66B007E761E /* StarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E5E632508E66B007E761E /* StarShape.swift */; };
-		F89E5E672508EB2E007E761E /* CGPoint + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E5E662508EB2E007E761E /* CGPoint + Extensions.swift */; };
-		F89E5E6A2508FE7E007E761E /* ColorsPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E5E692508FE7E007E761E /* ColorsPanelView.swift */; };
-		F89E5E6E2508FF7C007E761E /* ColorsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E5E6D2508FF7C007E761E /* ColorsCollectionViewCell.swift */; };
 		F89E5E70250927DF007E761E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F89E5E6F250927DF007E761E /* .gitignore */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +36,10 @@
 		F71E9801B9BDBD7DC5D9BEE9 /* Pods-CoreGraphicsTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreGraphicsTask.release.xcconfig"; path = "Target Support Files/Pods-CoreGraphicsTask/Pods-CoreGraphicsTask.release.xcconfig"; sourceTree = "<group>"; };
 		F80574842508BE3A00E01A71 /* BrushesPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushesPanelView.swift; sourceTree = "<group>"; };
 		F80574882508BEF700E01A71 /* BrushCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushCollectionViewCell.swift; sourceTree = "<group>"; };
+		F836A8DF250A07B4006824DA /* CGPoint + Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint + Extensions.swift"; sourceTree = "<group>"; };
+		F836A8E1250A07EB006824DA /* StarShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarShape.swift; sourceTree = "<group>"; };
+		F836A8E3250A07FE006824DA /* ColorsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsCollectionViewCell.swift; sourceTree = "<group>"; };
+		F836A8E5250A080A006824DA /* ColorsPanelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsPanelView.swift; sourceTree = "<group>"; };
 		F836CDA72507CB6900EB8977 /* CoreGraphicsTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreGraphicsTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F836CDAA2507CB6900EB8977 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F836CDAC2507CB6900EB8977 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,10 +55,6 @@
 		F89E5E5C2508DF3E007E761E /* LineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineShape.swift; sourceTree = "<group>"; };
 		F89E5E5E2508DF6D007E761E /* EllipseShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseShape.swift; sourceTree = "<group>"; };
 		F89E5E602508DFAA007E761E /* ShapeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeFactory.swift; sourceTree = "<group>"; };
-		F89E5E632508E66B007E761E /* StarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StarShape.swift; path = ../../../../../StarShape.swift; sourceTree = "<group>"; };
-		F89E5E662508EB2E007E761E /* CGPoint + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CGPoint + Extensions.swift"; path = "../../../../CGPoint + Extensions.swift"; sourceTree = "<group>"; };
-		F89E5E692508FE7E007E761E /* ColorsPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ColorsPanelView.swift; path = ../../../../../../ColorsPanelView.swift; sourceTree = "<group>"; };
-		F89E5E6D2508FF7C007E761E /* ColorsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ColorsCollectionViewCell.swift; path = ../../../../../../ColorsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F89E5E6F250927DF007E761E /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -190,7 +190,7 @@
 				F89E5E5C2508DF3E007E761E /* LineShape.swift */,
 				F89E5E5E2508DF6D007E761E /* EllipseShape.swift */,
 				F89E5E5A2508DEF1007E761E /* SquareShape.swift */,
-				F89E5E632508E66B007E761E /* StarShape.swift */,
+				F836A8E1250A07EB006824DA /* StarShape.swift */,
 				F89E5E622508E038007E761E /* ShapeFactory */,
 			);
 			path = Shapes;
@@ -207,7 +207,7 @@
 		F89E5E652508EB24007E761E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				F89E5E662508EB2E007E761E /* CGPoint + Extensions.swift */,
+				F836A8DF250A07B4006824DA /* CGPoint + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -215,8 +215,8 @@
 		F89E5E682508FE52007E761E /* ColorsPanelView */ = {
 			isa = PBXGroup;
 			children = (
+				F836A8E5250A080A006824DA /* ColorsPanelView.swift */,
 				F89E5E6B2508FF66007E761E /* Subviews */,
-				F89E5E692508FE7E007E761E /* ColorsPanelView.swift */,
 			);
 			path = ColorsPanelView;
 			sourceTree = "<group>";
@@ -224,7 +224,7 @@
 		F89E5E6B2508FF66007E761E /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				F89E5E6D2508FF7C007E761E /* ColorsCollectionViewCell.swift */,
+				F836A8E3250A07FE006824DA /* ColorsCollectionViewCell.swift */,
 			);
 			name = Subviews;
 			sourceTree = "<group>";
@@ -345,21 +345,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F89E5E642508E66B007E761E /* StarShape.swift in Sources */,
 				F836CDAF2507CB6900EB8977 /* ViewController.swift in Sources */,
-				F89E5E6E2508FF7C007E761E /* ColorsCollectionViewCell.swift in Sources */,
 				F836CDC02507CB8900EB8977 /* PaintView.swift in Sources */,
+				F836A8E4250A07FE006824DA /* ColorsCollectionViewCell.swift in Sources */,
+				F836A8E0250A07B4006824DA /* CGPoint + Extensions.swift in Sources */,
 				F89E5E572508DEB5007E761E /* AbstractShape.swift in Sources */,
+				F836A8E2250A07EB006824DA /* StarShape.swift in Sources */,
 				F89E5E5F2508DF6D007E761E /* EllipseShape.swift in Sources */,
 				F89E5E612508DFAA007E761E /* ShapeFactory.swift in Sources */,
 				F80574892508BEF700E01A71 /* BrushCollectionViewCell.swift in Sources */,
 				F89E5E5B2508DEF1007E761E /* SquareShape.swift in Sources */,
 				F836CDAB2507CB6900EB8977 /* AppDelegate.swift in Sources */,
 				F89E5E5D2508DF3E007E761E /* LineShape.swift in Sources */,
-				F89E5E672508EB2E007E761E /* CGPoint + Extensions.swift in Sources */,
 				F89E5E592508DECE007E761E /* PointShape.swift in Sources */,
+				F836A8E6250A080A006824DA /* ColorsPanelView.swift in Sources */,
 				F80574852508BE3A00E01A71 /* BrushesPanelView.swift in Sources */,
-				F89E5E6A2508FE7E007E761E /* ColorsPanelView.swift in Sources */,
 				F836CDAD2507CB6900EB8977 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
