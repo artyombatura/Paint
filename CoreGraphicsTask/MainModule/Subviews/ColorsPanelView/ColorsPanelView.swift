@@ -20,7 +20,6 @@ class ColorsPanelView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -31,8 +30,10 @@ class ColorsPanelView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        self.autoresizesSubviews = true
+        self.autoresizingMask = [.flexibleRightMargin, .flexibleBottomMargin, .flexibleWidth, .flexibleHeight]
+        
         setBrushesPanel()
-        constraintsForBrushesPanel()
     }
 }
 
@@ -67,7 +68,8 @@ extension ColorsPanelView {
         layout.minimumInteritemSpacing = 0.0
         layout.scrollDirection = .horizontal
         
-        colorsPanel = UICollectionView(frame: self.frame, collectionViewLayout: layout)
+        let frame: CGRect = CGRect(x: 0.0, y: 0.0, width: self.frame.width, height: self.frame.height)
+        colorsPanel = UICollectionView(frame: frame, collectionViewLayout: layout)
         colorsPanel.register(ColorsCollectionViewCell.self, forCellWithReuseIdentifier: ColorsCollectionViewCell.identifier)
         colorsPanel.showsVerticalScrollIndicator = false
         colorsPanel.showsHorizontalScrollIndicator =  false
@@ -76,10 +78,5 @@ extension ColorsPanelView {
         colorsPanel.dataSource = self
         self.addSubview(colorsPanel)
     }
-    
-    private func constraintsForBrushesPanel() {
-        colorsPanel.snp.makeConstraints {
-            $0.top.bottom.trailing.leading.equalToSuperview()
-        }
-    }
+
 }

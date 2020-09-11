@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 class PointShape: AbstractShape {
+    
+    
+    
     override func draw(inContext context: CGContext) {
         let points = self.getPoints()
         

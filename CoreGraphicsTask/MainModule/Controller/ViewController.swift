@@ -29,9 +29,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setPaintView()
         setBrushesPanelView()
         setColorsPanelView()
-        setPaintView()
         setLineWidthSlider()
         
         configTitle()
@@ -43,10 +43,8 @@ class ViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        constraintsForBrushesPanelView()
-        constraintsForColorsPanelView()
-        constraintsForPaintView()
-        constraintsForLineWidthSlider()
+        self.view.autoresizesSubviews = true
+        self.view.autoresizingMask = [.flexibleRightMargin, .flexibleBottomMargin, .flexibleWidth, .flexibleHeight]
     }
     
     //MARK: - Actions
@@ -71,49 +69,37 @@ class ViewController: UIViewController {
 extension ViewController {
     // Brushes panel
     private func setBrushesPanelView() {
-        brushesPanelView = BrushesPanelView(frame: .zero)
+        let expectedHeight: CGFloat = 60.0
+        let bottomSafeAreaHeight: CGFloat = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0.0
+        let frame: CGRect = CGRect(x: self.view.frame.origin.x, y: self.view.frame.height - bottomSafeAreaHeight - expectedHeight, width: self.view.frame.width, height: expectedHeight)
+        
+        brushesPanelView = BrushesPanelView(frame: frame)
         self.view.addSubview(brushesPanelView)
-    }
-    
-    private func constraintsForBrushesPanelView() {
-        brushesPanelView.snp.makeConstraints {
-            $0.trailing.leading.equalToSuperview()
-            $0.bottom.equalTo(self.view.layoutMarginsGuide.snp.bottom)
-            $0.height.equalTo(60.0)
-        }
     }
     
     // Colors panel
     private func setColorsPanelView() {
-        colorsPanelView = ColorsPanelView(frame: .zero)
+        let expectedHeight: CGFloat = 40.0
+        let frame: CGRect = CGRect(x: self.view.frame.origin.x, y: self.brushesPanelView.frame.origin.y - expectedHeight, width: self.view.frame.width, height: expectedHeight)
+        
+        colorsPanelView = ColorsPanelView(frame: frame)
         self.view.addSubview(colorsPanelView)
-    }
-    
-    private func constraintsForColorsPanelView() {
-        colorsPanelView.snp.makeConstraints {
-            $0.bottom.equalTo(brushesPanelView.snp.top)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(40.0)
-        }
     }
     
     // Paint view
     private func setPaintView() {
-        paintView = PaintView(frame: .zero)
+        paintView = PaintView(frame: self.view.frame)
         self.view.addSubview(paintView)
-    }
-    
-    private func constraintsForPaintView() {
-        paintView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(colorsPanelView.snp.top)
-        }
     }
     
     // Line width slider
     private func setLineWidthSlider() {
-        lineWidthSlider = UISlider(frame: .zero)
-        lineWidthSlider.minimumValue = 1.0
+        let expectedHeight: CGFloat = 20.0
+        let navBarHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.height ?? 0.0)
+        let frame: CGRect = CGRect(x: self.view.frame.origin.x, y: 10.0 + navBarHeight, width: self.view.frame.width, height: expectedHeight)
+        
+        lineWidthSlider = UISlider(frame: frame)
+        lineWidthSlider.minimumValue = Float(paintView.currentLineWidth)
         lineWidthSlider.maximumValue = 40.0
         
         lineWidthSlider.minimumTrackTintColor = .gray
@@ -124,13 +110,7 @@ extension ViewController {
         
         self.view.addSubview(lineWidthSlider)
     }
-    
-    private func constraintsForLineWidthSlider() {
-        lineWidthSlider.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(10.0)
-            $0.top.equalTo(self.view.layoutMarginsGuide.snp.top).offset(20.0)
-        }
-    }
+
 }
 
 // Config brushes panelView

@@ -10,6 +10,18 @@ import Foundation
 import UIKit
 
 class SquareShape: AbstractShape {
+    
+    override public var currentRect: CGRect {
+        let points = self.getPoints()
+        guard let startPoint = points.first,
+            let endPoint = points.last else { return CGRect.zero }
+
+        let height = endPoint.y - startPoint.y
+        let width = height
+        
+        return CGRect(x: startPoint.x, y: startPoint.y, width: width, height: height)
+    }
+    
     override func draw(inContext context: CGContext) {
         let points = self.getPoints()
         guard let startPoint = points.first,
@@ -22,4 +34,5 @@ class SquareShape: AbstractShape {
         
         context.addRect(rect)
     }
+    
 }

@@ -22,11 +22,14 @@ class PaintView: UIView {
     var currentBrush: BrushType = .point
     var currentStrokeColor: UIColor = .black
     var currentFillColor: UIColor = .clear
-    var currentLineWidth: CGFloat = 1.0
+    var currentLineWidth: CGFloat = 3.0
     
     //MARK: - INIT
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self.autoresizesSubviews = true
+        self.autoresizingMask = [.flexibleRightMargin, .flexibleBottomMargin, .flexibleWidth, .flexibleHeight]
         
         self.backgroundColor = .white
     }
@@ -34,29 +37,33 @@ class PaintView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
+        self.autoresizesSubviews = true
+        self.autoresizingMask = [.flexibleRightMargin, .flexibleBottomMargin, .flexibleWidth, .flexibleHeight]
+        
         self.backgroundColor = .white
     }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-
+        
         shapes.forEach { (shape) in
-            guard let context = UIGraphicsGetCurrentContext() else { return }
-            context.setLineWidth(shape.lineWidth)
-            context.setLineCap(.round)
-            
-            context.setStrokeColor(shape.strokeColor.cgColor)
-            context.setFillColor(shape.fillColor.cgColor)
-            
-            shape.draw(inContext: context)
-            
-            if shape.type == .point || shape.type == .line {
-                context.strokePath()
-            } else {
-                context.drawPath(using: .fillStroke)
+            if rect.contains(shape.currentRect) {
+                guard let context = UIGraphicsGetCurrentContext() else { return }
+                context.setLineWidth(shape.lineWidth)
+                context.setLineCap(.round)
+
+                context.setStrokeColor(shape.strokeColor.cgColor)
+                context.setFillColor(shape.fillColor.cgColor)
+
+                shape.draw(inContext: context)
+
+                if shape.type == .point || shape.type == .line {
+                    context.strokePath()
+                } else {
+                    context.drawPath(using: .fillStroke)
+                }
             }
         }
-    
     }
 
 }
@@ -70,7 +77,6 @@ extension PaintView: PaintViewInterface {
     
     func undoContext() {
         guard !shapes.isEmpty else { return }
-        
         shapes = shapes.dropLast()
         setNeedsDisplay()
     }
@@ -78,7 +84,6 @@ extension PaintView: PaintViewInterface {
 
 // UIResponder override
 extension PaintView {
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
@@ -97,19 +102,31 @@ extension PaintView {
         guard let touch = touches.first, let currentShape = shapes.popLast() else { return }
         let location = touch.location(in: self)
 
+        let previousRect = currentShape.currentRect.extendRect(scale: currentLineWidth / 2)
+        
         currentShape.addPoint(point: location)
         shapes.append(currentShape)
-
-        setNeedsDisplay()
+        
+        if currentShape.type != .point {
+            currentShape.removeMidPoints()
+        }
+        
+        setNeedsDisplay(previousRect)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first, let currentShape = shapes.popLast() else { return }
         let location = touch.location(in: self)
         
+        let previousRect = currentShape.currentRect.extendRect(scale: currentLineWidth / 2)
+        
         currentShape.addPoint(point: location)
         shapes.append(currentShape)
+
+        if currentShape.type != .point {
+            currentShape.removeMidPoints()
+        }
         
-        setNeedsDisplay()
+        setNeedsDisplay(previousRect)
     }
 }

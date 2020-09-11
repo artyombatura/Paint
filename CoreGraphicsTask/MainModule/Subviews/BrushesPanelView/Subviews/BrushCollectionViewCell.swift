@@ -29,27 +29,15 @@ class BrushCollectionViewCell: UICollectionViewCell {
         configUI()
         setTitleLabel()
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        constraintsForTitleLabel()
-    }
-
 }
 
 //MARK: - Setup
 extension BrushCollectionViewCell {
     private func setTitleLabel() {
-        titleLabel = UILabel(frame: .zero)
+        let frame: CGRect = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        titleLabel = UILabel(frame: frame)
         titleLabel.textAlignment = .center
         self.addSubview(titleLabel)
-    }
-    
-    private func constraintsForTitleLabel() {
-        titleLabel.snp.makeConstraints {
-            $0.top.trailing.bottom.leading.equalToSuperview().inset(4.0)
-        }
     }
 }
 

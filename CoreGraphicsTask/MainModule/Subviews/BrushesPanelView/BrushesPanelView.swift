@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import SnapKit
 
 class BrushesPanelView: UIView {
     
@@ -22,18 +21,21 @@ class BrushesPanelView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.autoresizesSubviews = true
+        self.autoresizingMask = [.flexibleRightMargin, .flexibleBottomMargin, .flexibleWidth, .flexibleHeight]
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-    }
+        
+        self.autoresizesSubviews = true
+        self.autoresizingMask = [.flexibleRightMargin, .flexibleBottomMargin, .flexibleWidth, .flexibleHeight]    }
     
     //MARK: - Lifecycle
     override func layoutSubviews() {
         super.layoutSubviews()
         
         setBrushesPanel()
-        constraintsForBrushesPanel()
     }
 }
 
@@ -68,7 +70,8 @@ extension BrushesPanelView {
         layout.minimumInteritemSpacing = 4.0
         layout.scrollDirection = .horizontal
         
-        brushesPanel = UICollectionView(frame: self.frame, collectionViewLayout: layout)
+        let frame: CGRect = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        brushesPanel = UICollectionView(frame: frame, collectionViewLayout: layout)
         brushesPanel.register(BrushCollectionViewCell.self, forCellWithReuseIdentifier: BrushCollectionViewCell.identifier)
         brushesPanel.showsVerticalScrollIndicator = false
         brushesPanel.showsHorizontalScrollIndicator =  false
@@ -76,11 +79,5 @@ extension BrushesPanelView {
         brushesPanel.delegate = self
         brushesPanel.dataSource = self
         self.addSubview(brushesPanel)
-    }
-    
-    private func constraintsForBrushesPanel() {
-        brushesPanel.snp.makeConstraints {
-            $0.top.bottom.trailing.leading.equalToSuperview()
-        }
     }
 }

@@ -11,6 +11,14 @@ import UIKit
 
 class StarShape: AbstractShape {
     
+    override public var currentRect: CGRect {
+        let points = self.getPoints()
+        guard let startPoint = points.first,
+            let endPoint = points.last else { return CGRect.zero }
+        
+        return CGRect(x: startPoint.x, y: startPoint.y, width: abs(endPoint.x - startPoint.x), height: abs(endPoint.y - startPoint.y))
+    }
+    
     let numberOfEdges = 5
     let innerRadiusRatio: CGFloat = 0.5
     var outerRadius: CGFloat = 30.0
@@ -38,5 +46,6 @@ class StarShape: AbstractShape {
         
         context.addLines(between: lines)
     }
+
 }
 

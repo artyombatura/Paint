@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 class EllipseShape: AbstractShape {
+    
+    
+    
     override func draw(inContext context: CGContext) {
         let points = self.getPoints()
         guard let startPoint = points.first,
