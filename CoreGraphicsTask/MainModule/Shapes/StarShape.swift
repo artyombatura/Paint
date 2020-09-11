@@ -11,17 +11,34 @@ import UIKit
 
 class StarShape: AbstractShape {
     
-    override public var currentRect: CGRect {
-        let points = self.getPoints()
-        guard let startPoint = points.first,
-            let endPoint = points.last else { return CGRect.zero }
-        
-        return CGRect(x: startPoint.x, y: startPoint.y, width: abs(endPoint.x - startPoint.x), height: abs(endPoint.y - startPoint.y))
-    }
-    
     let numberOfEdges = 5
     let innerRadiusRatio: CGFloat = 0.5
     var outerRadius: CGFloat = 30.0
+    
+    private var startPoint: CGPoint!
+    private var endPoint: CGPoint!
+    
+    override public var currentRect: CGRect {
+        guard startPoint != nil, endPoint != nil else { return CGRect.zero }
+        
+        return CGRect(x: startPoint.x - outerRadius, y: startPoint.y - outerRadius, width: abs(endPoint.x - startPoint.x) + outerRadius, height: abs(endPoint.y - startPoint.y) + outerRadius)
+    }
+    
+    override var rectToUpdateAfterDraw: CGRect {
+        return currentRect
+    }
+    
+    override func addPoint(point: CGPoint) {
+        if startPoint == nil {
+            startPoint = point
+        } else {
+            endPoint = point
+        }
+    }
+    
+    override func getPoints() -> [CGPoint] {
+        return [startPoint ?? CGPoint.zero, endPoint ?? CGPoint.zero]
+    }
     
     override func draw(inContext context: CGContext) {
         let points = self.getPoints()
@@ -45,6 +62,8 @@ class StarShape: AbstractShape {
         }
         
         context.addLines(between: lines)
+        
+        context.drawPath(using: .fillStroke)
     }
 
 }

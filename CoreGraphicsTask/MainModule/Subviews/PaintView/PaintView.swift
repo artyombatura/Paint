@@ -56,12 +56,6 @@ class PaintView: UIView {
                 context.setFillColor(shape.fillColor.cgColor)
 
                 shape.draw(inContext: context)
-
-                if shape.type == .point || shape.type == .line {
-                    context.strokePath()
-                } else {
-                    context.drawPath(using: .fillStroke)
-                }
             }
         }
     }
@@ -102,14 +96,10 @@ extension PaintView {
         guard let touch = touches.first, let currentShape = shapes.popLast() else { return }
         let location = touch.location(in: self)
 
-        let previousRect = currentShape.currentRect.extendRect(scale: currentLineWidth / 2)
+        let previousRect = currentShape.rectToUpdateAfterDraw.extendRect(byOffset: currentLineWidth)
         
         currentShape.addPoint(point: location)
         shapes.append(currentShape)
-        
-        if currentShape.type != .point {
-            currentShape.removeMidPoints()
-        }
         
         setNeedsDisplay(previousRect)
     }
@@ -118,15 +108,10 @@ extension PaintView {
         guard let touch = touches.first, let currentShape = shapes.popLast() else { return }
         let location = touch.location(in: self)
         
-        let previousRect = currentShape.currentRect.extendRect(scale: currentLineWidth / 2)
-        
         currentShape.addPoint(point: location)
         shapes.append(currentShape)
-
-        if currentShape.type != .point {
-            currentShape.removeMidPoints()
-        }
         
-        setNeedsDisplay(previousRect)
+        let shapeRect: CGRect = currentShape.rectToUpdateAfterDraw.extendRect(byOffset: currentLineWidth)
+        setNeedsDisplay(shapeRect)
     }
 }

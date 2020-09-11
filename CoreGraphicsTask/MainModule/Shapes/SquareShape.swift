@@ -11,15 +11,31 @@ import UIKit
 
 class SquareShape: AbstractShape {
     
+    private var startPoint: CGPoint!
+    private var endPoint: CGPoint!
+    
     override public var currentRect: CGRect {
-        let points = self.getPoints()
-        guard let startPoint = points.first,
-            let endPoint = points.last else { return CGRect.zero }
-
-        let height = endPoint.y - startPoint.y
-        let width = height
+        guard startPoint != nil, endPoint != nil else { return CGRect.zero }
+        let width = endPoint.y - startPoint.y
+        let height = width
         
         return CGRect(x: startPoint.x, y: startPoint.y, width: width, height: height)
+    }
+    
+    override var rectToUpdateAfterDraw: CGRect {
+        return currentRect
+    }
+    
+    override func addPoint(point: CGPoint) {
+        if startPoint == nil {
+            startPoint = point
+        } else {
+            endPoint = point
+        }
+    }
+    
+    override func getPoints() -> [CGPoint] {
+        return [startPoint ?? CGPoint.zero, endPoint ?? CGPoint.zero]
     }
     
     override func draw(inContext context: CGContext) {
@@ -33,6 +49,8 @@ class SquareShape: AbstractShape {
         let rect: CGRect = CGRect(x: startPoint.x, y: startPoint.y, width: width, height: height)
         
         context.addRect(rect)
+        
+        context.drawPath(using: .fillStroke)
     }
     
 }
