@@ -47,7 +47,7 @@ class PaintView: UIView {
         super.draw(rect)
         
         shapes.forEach { (shape) in
-            if rect.contains(shape.currentRect) {
+            if rect.intersects(shape.currentRect) {
                 guard let context = UIGraphicsGetCurrentContext() else { return }
                 context.setLineWidth(shape.lineWidth)
                 context.setLineCap(.round)
