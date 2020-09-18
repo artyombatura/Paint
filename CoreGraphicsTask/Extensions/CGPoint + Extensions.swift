@@ -21,3 +21,13 @@ extension CGPoint {
         return CGPoint(x: x, y: y)
     }
 }
+
+// Static
+extension CGPoint {
+    static func pointFrom(angle: CGFloat, radius: CGFloat, offset: CGPoint) -> CGPoint {
+       let x = radius * cos(angle) + offset.x
+       let y = radius * sin(angle) + offset.y
+            
+       return CGPoint(x: x, y: y)
+    }
+}

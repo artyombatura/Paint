@@ -11,40 +11,76 @@ import UIKit
 
 class StarShape: AbstractShape {
     
+    let numberOfEdges = 5
+    let outerRadius: CGFloat = 20.0
+    let smoothness: CGFloat = 0.45
+    
+    private var startPoint: CGPoint!
+    private var endPoint: CGPoint!
+    
     override public var currentRect: CGRect {
-        let points = self.getPoints()
-        guard let startPoint = points.first,
-            let endPoint = points.last else { return CGRect.zero }
+        guard startPoint != nil, endPoint != nil else { return CGRect.zero }
+ 
+        let width = endPoint.x - startPoint.x
+        let height = endPoint.y - startPoint.y
         
-        return CGRect(x: startPoint.x, y: startPoint.y, width: abs(endPoint.x - startPoint.x), height: abs(endPoint.y - startPoint.y))
+        return CGRect(x: startPoint.x, y: startPoint.y, width: width, height: height).extendRect(byOffset: outerRadius)
     }
     
-    let numberOfEdges = 5
-    let innerRadiusRatio: CGFloat = 0.5
-    var outerRadius: CGFloat = 30.0
+    override var rectToUpdateAfterDraw: CGRect {
+        return currentRect
+    }
+    
+    override func addPoint(point: CGPoint) {
+        if startPoint == nil {
+            startPoint = point
+        } else {
+            endPoint = point
+        }
+    }
+    
+    override func getPoints() -> [CGPoint] {
+        return [startPoint ?? CGPoint.zero, endPoint ?? CGPoint.zero]
+    }
     
     override func draw(inContext context: CGContext) {
         let points = self.getPoints()
         guard let startPoint = points.first,
             let endPoint = points.last else { return }
         
+        let originX = startPoint.x >  endPoint.x ? endPoint.x : startPoint.x
+        let originY = startPoint.y > endPoint.y ? endPoint.y : startPoint.y
+        
         let rect: CGRect = CGRect(x: startPoint.x, y: startPoint.y, width: endPoint.x - startPoint.x, height: endPoint.y - startPoint.y)
-        outerRadius = rect.width
         
-        let origin = CGPoint(x: startPoint.x, y: startPoint.y)
-        let angle: CGFloat = 360.0 / CGFloat(numberOfEdges)
-        let lines = (0..<(numberOfEdges * 2) + 1).map { (index) -> CGPoint in
-            var point = origin
-            let radius = index % 2 == 0 ? outerRadius : (outerRadius * innerRadiusRatio)
-            let pointRotation = index % 2 == 0 ? CGFloat(angle * CGFloat(index)) : CGFloat(angle * CGFloat(index)) + CGFloat(angle / 2)
+        let center = CGPoint(x: originX + rect.width / 2.0, y: originY + rect.height / 2.0)
+        
+        var angle: CGFloat = CGFloat(CGFloat.pi / 2.0)
+        let angleIncrement = CGFloat(Double.pi * 2.0 / Double(numberOfEdges))
+        
+        let radius: CGFloat = rect.height < rect.width ? rect.height / 2.0 : rect.width / 2.0
+        let midRadius: CGFloat = 0.45 * radius
+                
+        var firstPoint = true
+        
+        for _ in 1...numberOfEdges {
+            let point = CGPoint.pointFrom(angle: angle, radius: midRadius, offset: center) //1
+            let nextPoint = CGPoint.pointFrom(angle: angle + angleIncrement, radius: midRadius, offset: center) //2
+            let midPoint = CGPoint.pointFrom(angle: angle + angleIncrement / 2.0, radius: radius, offset: center) //3
+                    
+            if firstPoint {
+                firstPoint = false
             
-            point.y -= radius
-            point = point.rotate(around: origin, with: pointRotation)
+                context.move(to: point)
+            }
             
-            return point
+            context.addLine(to: midPoint)
+            context.addLine(to: nextPoint)
+           
+            angle += angleIncrement
         }
-        
-        context.addLines(between: lines)
+
+        context.drawPath(using: .fillStroke)
     }
 
 }

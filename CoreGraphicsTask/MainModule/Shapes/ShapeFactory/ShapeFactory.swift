@@ -12,11 +12,11 @@ import Foundation
 class ShapeFactory {
     public static func factoryMethod(type: BrushType) -> AbstractShape {
         switch type {
-        case .point:     return PointShape(type: .point)
-        case .line:      return LineShape(type: .line)
-        case .ellipse:   return EllipseShape(type: .ellipse)
-        case .square:    return SquareShape(type: .square)
-        case .star:      return StarShape(type: .star)
+        case .point:     return PointShape()
+        case .line:      return LineShape()
+        case .ellipse:   return EllipseShape()
+        case .rectangle:    return RectangleShape()
+        case .star:      return StarShape()
         }
     }
 }

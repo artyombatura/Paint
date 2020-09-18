@@ -15,7 +15,7 @@ class BrushesPanelView: UIView {
     private var brushesPanel: UICollectionView!
     
     // Properties
-    private var brushes: [BrushType] = [.point, .line, .ellipse, .square, .star]
+    private var brushes: [BrushType] = [.point, .line, .ellipse, .rectangle, .star]
     public var didSelectBrush: ((BrushType) -> Void)?
     
     override init(frame: CGRect) {

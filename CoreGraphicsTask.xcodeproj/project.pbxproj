@@ -21,11 +21,11 @@
 		F836CDC02507CB8900EB8977 /* PaintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F836CDBF2507CB8900EB8977 /* PaintView.swift */; };
 		F89E5E572508DEB5007E761E /* AbstractShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E5E562508DEB5007E761E /* AbstractShape.swift */; };
 		F89E5E592508DECE007E761E /* PointShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E5E582508DECE007E761E /* PointShape.swift */; };
-		F89E5E5B2508DEF1007E761E /* SquareShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E5E5A2508DEF1007E761E /* SquareShape.swift */; };
+		F89E5E5B2508DEF1007E761E /* RectangleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E5E5A2508DEF1007E761E /* RectangleShape.swift */; };
 		F89E5E5D2508DF3E007E761E /* LineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E5E5C2508DF3E007E761E /* LineShape.swift */; };
-		F89E5E5F2508DF6D007E761E /* EllipseShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E5E5E2508DF6D007E761E /* EllipseShape.swift */; };
 		F89E5E612508DFAA007E761E /* ShapeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E5E602508DFAA007E761E /* ShapeFactory.swift */; };
 		F89E5E70250927DF007E761E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F89E5E6F250927DF007E761E /* .gitignore */; };
+		F8D73D5D250B6B0E00FCFA6A /* EllipseShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D73D5C250B6B0D00FCFA6A /* EllipseShape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,11 +45,11 @@
 		F836CDBF2507CB8900EB8977 /* PaintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaintView.swift; sourceTree = "<group>"; };
 		F89E5E562508DEB5007E761E /* AbstractShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractShape.swift; sourceTree = "<group>"; };
 		F89E5E582508DECE007E761E /* PointShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointShape.swift; sourceTree = "<group>"; };
-		F89E5E5A2508DEF1007E761E /* SquareShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareShape.swift; sourceTree = "<group>"; };
+		F89E5E5A2508DEF1007E761E /* RectangleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleShape.swift; sourceTree = "<group>"; };
 		F89E5E5C2508DF3E007E761E /* LineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineShape.swift; sourceTree = "<group>"; };
-		F89E5E5E2508DF6D007E761E /* EllipseShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseShape.swift; sourceTree = "<group>"; };
 		F89E5E602508DFAA007E761E /* ShapeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeFactory.swift; sourceTree = "<group>"; };
 		F89E5E6F250927DF007E761E /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		F8D73D5C250B6B0D00FCFA6A /* EllipseShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EllipseShape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,8 +160,8 @@
 				F89E5E562508DEB5007E761E /* AbstractShape.swift */,
 				F89E5E582508DECE007E761E /* PointShape.swift */,
 				F89E5E5C2508DF3E007E761E /* LineShape.swift */,
-				F89E5E5E2508DF6D007E761E /* EllipseShape.swift */,
-				F89E5E5A2508DEF1007E761E /* SquareShape.swift */,
+				F8D73D5C250B6B0D00FCFA6A /* EllipseShape.swift */,
+				F89E5E5A2508DEF1007E761E /* RectangleShape.swift */,
 				F836A8E1250A07EB006824DA /* StarShape.swift */,
 				F89E5E622508E038007E761E /* ShapeFactory */,
 			);
@@ -280,12 +280,12 @@
 				F836A8E0250A07B4006824DA /* CGPoint + Extensions.swift in Sources */,
 				F89E5E572508DEB5007E761E /* AbstractShape.swift in Sources */,
 				F836A8E2250A07EB006824DA /* StarShape.swift in Sources */,
-				F89E5E5F2508DF6D007E761E /* EllipseShape.swift in Sources */,
 				F89E5E612508DFAA007E761E /* ShapeFactory.swift in Sources */,
 				F80574892508BEF700E01A71 /* BrushCollectionViewCell.swift in Sources */,
-				F89E5E5B2508DEF1007E761E /* SquareShape.swift in Sources */,
+				F89E5E5B2508DEF1007E761E /* RectangleShape.swift in Sources */,
 				F836CDAB2507CB6900EB8977 /* AppDelegate.swift in Sources */,
 				F89E5E5D2508DF3E007E761E /* LineShape.swift in Sources */,
+				F8D73D5D250B6B0E00FCFA6A /* EllipseShape.swift in Sources */,
 				F89E5E592508DECE007E761E /* PointShape.swift in Sources */,
 				F836A8E6250A080A006824DA /* ColorsPanelView.swift in Sources */,
 				F80574852508BE3A00E01A71 /* BrushesPanelView.swift in Sources */,

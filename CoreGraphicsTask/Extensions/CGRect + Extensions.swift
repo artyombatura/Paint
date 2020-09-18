@@ -11,17 +11,12 @@ import UIKit
 
 extension CGRect {
     public func extendRect(byOffset offset: CGFloat) -> CGRect {
-        return CGRect.zero
-    }
-    
-    public func extendRect(scale: CGFloat) -> CGRect {
+        let originX: CGFloat = self.maxX > self.minX ? self.minX - offset : self.maxX - offset
+        let originY: CGFloat = self.maxY > self.minY ? self.minY - offset : self.maxY - offset
         
-        let newHeight: CGFloat = self.height * scale
-        let newWidth: CGFloat = self.width * scale
+        let newMaxX: CGFloat = self.maxX + offset
+        let newMaxY: CGFloat = self.maxY + offset
         
-        let newOriginX = self.minX - (newWidth / 2) + (self.width / 2)
-        let newOriginY = self.minY - (newHeight / 2) + (self.height / 2)
-        
-        return CGRect(x: newOriginX, y: newOriginY, width: newWidth, height: newHeight)
+        return CGRect(x: originX, y: originY, width: abs(newMaxX - originX), height: abs(newMaxY - originY))
     }
 }

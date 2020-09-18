@@ -19,6 +19,7 @@ class PaintView: UIView {
 
     //MARK: - PROPERTIES
     private var shapes: [AbstractShape] = []
+    
     var currentBrush: BrushType = .point
     var currentStrokeColor: UIColor = .black
     var currentFillColor: UIColor = .clear
@@ -47,7 +48,7 @@ class PaintView: UIView {
         super.draw(rect)
         
         shapes.forEach { (shape) in
-            if rect.contains(shape.currentRect) {
+            if rect.intersects(shape.currentRect) {
                 guard let context = UIGraphicsGetCurrentContext() else { return }
                 context.setLineWidth(shape.lineWidth)
                 context.setLineCap(.round)
@@ -56,12 +57,6 @@ class PaintView: UIView {
                 context.setFillColor(shape.fillColor.cgColor)
 
                 shape.draw(inContext: context)
-
-                if shape.type == .point || shape.type == .line {
-                    context.strokePath()
-                } else {
-                    context.drawPath(using: .fillStroke)
-                }
             }
         }
     }
@@ -72,12 +67,14 @@ class PaintView: UIView {
 extension PaintView: PaintViewInterface {
     func clearContext() {
         shapes = [AbstractShape]()
+        
         setNeedsDisplay()
     }
     
     func undoContext() {
         guard !shapes.isEmpty else { return }
         shapes = shapes.dropLast()
+        
         setNeedsDisplay()
     }
 }
@@ -102,14 +99,10 @@ extension PaintView {
         guard let touch = touches.first, let currentShape = shapes.popLast() else { return }
         let location = touch.location(in: self)
 
-        let previousRect = currentShape.currentRect.extendRect(scale: currentLineWidth / 2)
+        let previousRect = currentShape.rectToUpdateAfterDraw.extendRect(byOffset: currentLineWidth)
         
         currentShape.addPoint(point: location)
         shapes.append(currentShape)
-        
-        if currentShape.type != .point {
-            currentShape.removeMidPoints()
-        }
         
         setNeedsDisplay(previousRect)
     }
@@ -118,15 +111,14 @@ extension PaintView {
         guard let touch = touches.first, let currentShape = shapes.popLast() else { return }
         let location = touch.location(in: self)
         
-        let previousRect = currentShape.currentRect.extendRect(scale: currentLineWidth / 2)
+        let previousRect = currentShape.rectToUpdateAfterDraw.extendRect(byOffset: currentLineWidth)
         
         currentShape.addPoint(point: location)
         shapes.append(currentShape)
-
-        if currentShape.type != .point {
-            currentShape.removeMidPoints()
-        }
+        
+        let shapeRect: CGRect = currentShape.rectToUpdateAfterDraw.extendRect(byOffset: currentLineWidth)
         
         setNeedsDisplay(previousRect)
+        setNeedsDisplay(shapeRect)
     }
 }
