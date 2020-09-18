@@ -111,14 +111,10 @@ extension PaintView {
         guard let touch = touches.first, let currentShape = shapes.popLast() else { return }
         let location = touch.location(in: self)
         
-        let previousRect = currentShape.rectToUpdateAfterDraw.extendRect(byOffset: currentLineWidth)
-        
         currentShape.addPoint(point: location)
         shapes.append(currentShape)
         
         let shapeRect: CGRect = currentShape.rectToUpdateAfterDraw.extendRect(byOffset: currentLineWidth)
-        
-        setNeedsDisplay(previousRect)
         setNeedsDisplay(shapeRect)
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 
 extension CGRect {
     public func extendRect(byOffset offset: CGFloat) -> CGRect {
+        
         let originX: CGFloat = self.maxX > self.minX ? self.minX - offset : self.maxX - offset
         let originY: CGFloat = self.maxY > self.minY ? self.minY - offset : self.maxY - offset
         
@@ -18,5 +19,7 @@ extension CGRect {
         let newMaxY: CGFloat = self.maxY + offset
         
         return CGRect(x: originX, y: originY, width: abs(newMaxX - originX), height: abs(newMaxY - originY))
+        
+        
     }
 }

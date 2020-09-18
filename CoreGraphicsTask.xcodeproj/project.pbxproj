@@ -161,7 +161,7 @@
 				F89E5E582508DECE007E761E /* PointShape.swift */,
 				F89E5E5C2508DF3E007E761E /* LineShape.swift */,
 				F8D73D5C250B6B0D00FCFA6A /* EllipseShape.swift */,
-				F89E5E5A2508DEF1007E761E /* RectangleShape.swift */,
+				F89E5E5A2508DEF1007E761E /* SquareShape.swift */,
 				F836A8E1250A07EB006824DA /* StarShape.swift */,
 				F89E5E622508E038007E761E /* ShapeFactory */,
 			);

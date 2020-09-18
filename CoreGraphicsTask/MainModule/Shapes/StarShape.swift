@@ -12,19 +12,16 @@ import UIKit
 class StarShape: AbstractShape {
     
     let numberOfEdges = 5
-    let outerRadius: CGFloat = 20.0
-    let smoothness: CGFloat = 0.45
+    let innerRadiusRatio: CGFloat = 0.5
+    var outerRadius: CGFloat = 30.0
     
     private var startPoint: CGPoint!
     private var endPoint: CGPoint!
     
     override public var currentRect: CGRect {
         guard startPoint != nil, endPoint != nil else { return CGRect.zero }
- 
-        let width = endPoint.x - startPoint.x
-        let height = endPoint.y - startPoint.y
         
-        return CGRect(x: startPoint.x, y: startPoint.y, width: width, height: height).extendRect(byOffset: outerRadius)
+        return CGRect(x: startPoint.x - outerRadius, y: startPoint.y - outerRadius, width: abs(endPoint.x - startPoint.x) + outerRadius, height: abs(endPoint.y - startPoint.y) + outerRadius)
     }
     
     override var rectToUpdateAfterDraw: CGRect {
@@ -79,7 +76,9 @@ class StarShape: AbstractShape {
            
             angle += angleIncrement
         }
-
+        
+        context.addLines(between: lines)
+        
         context.drawPath(using: .fillStroke)
     }
 

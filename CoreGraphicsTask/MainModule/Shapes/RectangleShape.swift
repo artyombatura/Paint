@@ -14,11 +14,13 @@ class RectangleShape: AbstractShape {
     private var startPoint: CGPoint!
     private var endPoint: CGPoint!
     
+    private var startPoint: CGPoint!
+    private var endPoint: CGPoint!
+    
     override public var currentRect: CGRect {
         guard startPoint != nil, endPoint != nil else { return CGRect.zero }
-        
-        let width = endPoint.x - startPoint.x
-        let height = endPoint.y - startPoint.y
+        let width = endPoint.y - startPoint.y
+        let height = width
         
         return CGRect(x: startPoint.x, y: startPoint.y, width: width, height: height)
     }
